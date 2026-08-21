@@ -1,0 +1,20 @@
+{
+  "orderId": "order_1042",
+  "updateId": "update_fulfilled_3",
+  "status": "fulfilled",
+  "customer": {
+    "name": "Mina Chen",
+    "email": "mina@example.com",
+    "billingAddress": "18 Market Street, Shanghai"
+  },
+  "receipt": {
+    "number": "RCPT-1042",
+    "status": "succeeded",
+    "paidAt": "2026-08-12T08:30:00.000Z"
+  },
+  "currency": "USD",
+  "items": [
+    { "name": "Canvas tote", "quantity": 2, "unitPriceCents": 2400 },
+    { "name": "Gift wrap", "quantity": 1, "unitPriceCents": 500 }
+  ]
+}
