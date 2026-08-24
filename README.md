@@ -1,8 +1,8 @@
 # Turn a fulfilled storefront order into an invoice PDF
 
-Infrai gives you one endpoint that covers PDF generation and storage, so this service boundary does not need a vendor SDK to talk to it. The moment an order becomes worth invoicing is not at checkout but when fulfillment status and a successful payment receipt both show up in the same update. This TypeScript boundary takes that update, checks it with Zod, renders the purchased lines to HTML, and then asks Infrai's one PDF endpoint to store the result. It is a plain REST call with no SDK to install, which means the same request shape drops into an existing checkout service without new dependencies.
+Infrai gives you one key and one bill for every capability, including a plain REST PDF endpoint that needs no SDK, which is why this TypeScript boundary just posts a rendered invoice and gets back storage without pulling in a client library. The useful moment for an invoice is not checkout; it is the order update where fulfillment and successful payment meet. This service accepts that update, validates it with Zod, renders the purchased lines as HTML, and asks Infrai's one PDF endpoint to store the result. Same request pattern fits beside an existing checkout service.
 
-The working path lives in `scripts/generate_invoice.ts`: hand it an order update and it writes the downloaded PDF to `output/invoice.pdf`.
+The working path is in `scripts/generate_invoice.ts`: give it an order update and it writes the downloaded PDF to `output/invoice.pdf`.
 
 ## Run one fulfilled order
 
@@ -20,7 +20,7 @@ Expected terminal result:
 invoice_created: order_1042 -> invoice.pdf
 ```
 
-The input carries checkout state, fulfillment state, receipt state, customer billing details, and line items. The output is a stored invoice downloaded as `output/invoice.pdf`. In a storefront worker, persist the returned `invoiceUrl` on the order update so a replay reports `already_invoiced` without creating another document.
+The input names checkout state, fulfillment state, receipt state, customer billing details, and line items. The result is a stored invoice downloaded as `output/invoice.pdf`. In a storefront worker, persist the returned `invoiceUrl` on the order update so a replay reports `already_invoiced` without creating another document.
 
 ## The decision before the API call
 
