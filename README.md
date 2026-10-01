@@ -1,6 +1,6 @@
 # Turn a fulfilled storefront order into an invoice PDF
 
-Infrai gives you one key and one bill for every capability, including a plain REST PDF endpoint that needs no SDK, which is why this TypeScript boundary just posts a rendered invoice and gets back storage without pulling in a client library. The useful moment for an invoice is not checkout; it is the order update where fulfillment and successful payment meet. This service accepts that update, validates it with Zod, renders the purchased lines as HTML, and asks Infrai's one PDF endpoint to store the result. Same request pattern fits beside an existing checkout service.
+The useful moment for an invoice is not checkout; it is the order update where fulfillment and successful payment meet. This TypeScript service boundary accepts that update, validates it with Zod, renders the purchased lines as HTML, and asks Infrai's one PDF endpoint to store the result. It is a plain REST call with no SDK to install, so the same request pattern fits beside an existing checkout service.
 
 The working path is in `scripts/generate_invoice.ts`: give it an order update and it writes the downloaded PDF to `output/invoice.pdf`.
 
